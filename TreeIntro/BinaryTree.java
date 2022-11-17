@@ -9,7 +9,7 @@ public class BinaryTree
       Constructs an empty tree.
    */
    public BinaryTree() { root = null; }
-
+   
    /**
       Constructs a tree with one node and no children.
       @param rootData the data for the root
@@ -18,7 +18,8 @@ public class BinaryTree
    {
       root = new Node();
       root.data = rootData;
-      
+      root.left = null;
+      root.right = null;
    }
 
    /**
@@ -31,14 +32,19 @@ public class BinaryTree
    {
        root = new Node();
        root.data = rootData;
+       if(left != null)
+           root.left = left.root;
+       if(right!= null)       
+           root.right = right.root;
        
 
    }
 
-   class Node
-   {
-     
-   }
+   class Node{
+       public Object data;
+       public Node left;
+       public Node right;
+    }
 
    /**
       Returns the height of the subtree whose root is the given node.
@@ -47,7 +53,10 @@ public class BinaryTree
    */
    private static int height(Node n)
    {
-       
+       if(n == null)
+           return 0;
+       else
+            return 1+Math.max(height(n.left), height(n.right));
 
    }
 
@@ -75,7 +84,10 @@ public class BinaryTree
    */
    public BinaryTree left()
    {
-      
+      BinaryTree result = new BinaryTree();
+      if(root.left != null)
+          result.root = root.left;
+      return result;
 
    }
 
@@ -85,6 +97,27 @@ public class BinaryTree
    */
    public BinaryTree right()
    {
-      
+      BinaryTree result = new BinaryTree();
+      result.root = root.right;
+      return result;
    }
+   
+   public int countNodesWithOneChild()
+     {
+        int sum = 0;
+     if(this.left() != null && this.right() == null)
+     {
+        sum += 1;
+     }
+     else if((this.left() == null && this.right() != null))
+     {
+        sum+=1;
+        sum+=this.right().countNodesWithOneChild();
+     }
+     else
+     {
+        sum+=this.left().countNodesWithOneChild()+this.right().countNodesWithOneChild();
+     }
+     return sum;
+     }
 }
