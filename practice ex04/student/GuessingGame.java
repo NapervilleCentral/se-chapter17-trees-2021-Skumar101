@@ -39,15 +39,45 @@ public class GuessingGame
       String response;
       Scanner in = new Scanner(System.in);
       System.out.println("Let's play a guessing game.");
-
+      String correct;
+      String newQuestion;
       while (!done)
       {
-         
-         
+        BinaryTree left = questionTree.left();
+        BinaryTree right = questionTree.right();
+        if(left.isEmpty() && right.isEmpty())
+        {
+           System.out.println(questionTree.data());
+           System.out.println("Was this correct? Y/N");
+           response = in.next();
+           if(response.equals("Y"))
+               done = true;
+           else
+               {
+                   
+                   System.out.println("What is the correct answer?");
+                   correct = in.next();
+                   System.out.println("What's a question that gets this answer?");
+                   in.nextLine();
+                   newQuestion = in.nextLine();
+                   
+               }
+        }
+        else
+        {
+            do{
+                System.out.print(questionTree.data()+" Y/N");
+                response = in.next().toUpperCase();
+              }
+              while(!response.equals("Y") && !response.equals("N"));
+             if(response.equals("Y"))
+              questionTree = left;
+            else
+                questionTree = right;  
+          }
       }
 
       String message = "Great, " + current.data();
-      System.out.println(message.replace("Is it", "it is")
-         .replace("?", "."));
+      System.out.println(message);
    }
 }
