@@ -52,32 +52,23 @@ public class BinaryTree
       public int countNodesWithOneChild()
       {
          int count = 0;
-         
-         if(this.left != null && this.right == null)
-             {count+=1;
-             count+=this.left.countNodesWithOneChild();
-            }
-         else if(this.left == null && this.right!= null)
-            {
-                count += 1;
-                count+=this.right.countNodesWithOneChild();
-            }
-         else if(this.left != null && this.right != null)
-            {
-                 count+=this.right.countNodesWithOneChild() + this.left.countNodesWithOneChild();
-            }
-         
+
+
+
+
          return count;
       }
    }
 
+   /**
+      Counts the number of nodes with only one child.
+      @return The number of nodes with only one child.
+   */
    public int countNodesWithOneChild()
-      {
-         if (root==null)
-             return 0;
-         else
-             return root.countNodesWithOneChild();
-      }
+   {
+      return 0;
+   }
+
    /**
       Returns the height of the subtree whose root is the given node.
       @param n a node or null
@@ -129,8 +120,7 @@ public class BinaryTree
    public BinaryTree left()
    {
       BinaryTree result = new BinaryTree();
-      if(root.left!=null)
-          result.root = root.left;
+      result.root = root.left;
       return result;
    }
 
@@ -141,8 +131,7 @@ public class BinaryTree
    public BinaryTree right()
    {
       BinaryTree result = new BinaryTree();
-      if(root.right!=null)
-          result.root = root.right;
+      result.root = root.right;
       return result;
    }
 }

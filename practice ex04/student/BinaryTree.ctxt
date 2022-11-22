@@ -15,6 +15,7 @@ comment3.target=BinaryTree(java.lang.Object,\ BinaryTree,\ BinaryTree)
 comment3.text=\r\n\ \ \ \ \ \ Constructs\ a\ binary\ tree.\r\n\ \ \ \ \ \ @param\ rootData\ the\ data\ for\ the\ root\r\n\ \ \ \ \ \ @param\ left\ the\ left\ subtree\r\n\ \ \ \ \ \ @param\ right\ the\ right\ subtree\r\n
 comment4.params=
 comment4.target=int\ countNodesWithOneChild()
+comment4.text=\r\n\ \ \ \ \ \ Counts\ the\ number\ of\ nodes\ with\ only\ one\ child.\r\n\ \ \ \ \ \ @return\ The\ number\ of\ nodes\ with\ only\ one\ child.\r\n
 comment5.params=n
 comment5.target=int\ height(BinaryTree.Node)
 comment5.text=\r\n\ \ \ \ \ \ Returns\ the\ height\ of\ the\ subtree\ whose\ root\ is\ the\ given\ node.\r\n\ \ \ \ \ \ @param\ n\ a\ node\ or\ null\r\n\ \ \ \ \ \ @return\ the\ height\ of\ the\ subtree,\ or\ 0\ if\ n\ is\ null\r\n
