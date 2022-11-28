@@ -49,7 +49,65 @@ public class BinarySearchTree
         }
         return false;
     }
-
+    /**
+     * Tries to remove an object from the tree, does nothing if the object
+     * is not contained in the tree
+     * @param obj - the object to remove
+     */
+    public void remove(Comparable obj)
+    {
+        Node toBeRemoved = root;
+        Node parent = null;
+        boolean found = false;
+        
+        while(!found && toBeRemoved != null)
+        {
+            int d = toBeRemoved.data.compareTo(obj);
+            if(d==0)
+                found = true;
+            else
+                {
+                    parent = toBeRemoved;
+                    if(d>0)
+                        toBeRemoved = toBeRemoved.left;
+                    else
+                        toBeRemoved = toBeRemoved.right;
+                }
+            if(!found)
+                return;
+            if(toBeRemoved.left==null||toBeRemoved.right==null)
+            {
+                Node newChild;
+                if(toBeRemoved.left == null)
+                    newChild = toBeRemoved.right;
+                else
+                    newChild = toBeRemoved.left;
+                if(parent == null)
+                    root = newChild;
+                else if(parent.left == toBeRemoved)
+                    parent.left = newChild;
+                else
+                    parent.right = newChild;
+                
+                    return;
+            }
+            Node smallestParent = toBeRemoved;
+            Node smallest = toBeRemoved.right;
+            
+            while(smallest.left != null)
+            {
+                smallestParent = smallest;
+                smallest = smallest.left;
+            }
+            
+            toBeRemoved.data = smallest.data;
+            if(smallestParent == toBeRemoved)
+                smallestParent.right = smallest.right;
+            else
+                smallestParent.left = smallest.left;
+        }
+    }
+    
    /**
       Prints the contents of the tree in sorted order.
    */
@@ -90,7 +148,9 @@ public class BinarySearchTree
           int comp = newNode.data.compareTo(this.data);
           if(comp<0)
           {
-              if(left == null){left = newNode;}
+              if(left == null){
+                  left = newNode;
+                }
               else
                   {
                       left.addNode(newNode);

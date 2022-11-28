@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=TreeTester
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ TreeTester\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=void\ main()
+comment0.text=\r\n\ \ \ This\ program\ tests\ the\ binary\ search\ tree\ class.\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
 numComments=2
