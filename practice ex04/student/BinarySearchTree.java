@@ -49,73 +49,100 @@ public class BinarySearchTree
         }
         return false;
     }
-    /**
-     * Tries to remove an object from the tree, does nothing if the object
-     * is not contained in the tree
-     * @param obj - the object to remove
+    public Comparable smallest()
+    {
+        Node Position = root;
+        while(Position.left!=null)
+            Position = Position.left;
+        return Position.data;
+    }
+    public Comparable largest()
+    {
+        Node Position = root;
+        while(Position.right!=null)
+            Position = Position.right;
+        return Position.data;
+    }
+     /**
+     * Tries to remove an object from the tree. Does nothing
+     *if the object is not contained in the tree.
+     *@param obj the object to remove
      */
     public void remove(Comparable obj)
     {
+        // Find node to be removed
         Node toBeRemoved = root;
         Node parent = null;
         boolean found = false;
-        
-        while(!found && toBeRemoved != null)
+        while (!found && toBeRemoved != null)
         {
-            int d = toBeRemoved.data.compareTo(obj);
-            if(d==0)
-                found = true;
-            else
-                {
-                    parent = toBeRemoved;
-                    if(d>0)
-                        toBeRemoved = toBeRemoved.left;
-                    else
-                        toBeRemoved = toBeRemoved.right;
-                }
-            if(!found)
-                return;
-            if(toBeRemoved.left==null||toBeRemoved.right==null)
-            {
-                Node newChild;
-                if(toBeRemoved.left == null)
-                    newChild = toBeRemoved.right;
-                else
-                    newChild = toBeRemoved.left;
-                if(parent == null)
-                    root = newChild;
-                else if(parent.left == toBeRemoved)
-                    parent.left = newChild;
-                else
-                    parent.right = newChild;
-                
-                    return;
-            }
-            Node smallestParent = toBeRemoved;
-            Node smallest = toBeRemoved.right;
-            
-            while(smallest.left != null)
-            {
-                smallestParent = smallest;
-                smallest = smallest.left;
-            }
-            
-            toBeRemoved.data = smallest.data;
-            if(smallestParent == toBeRemoved)
-                smallestParent.right = smallest.right;
-            else
-                smallestParent.left = smallest.left;
+        int d = toBeRemoved.data.compareTo(obj);
+        if (d == 0) { found = true; }
+        else
+        {
+        parent = toBeRemoved;
+        if (d > 0) { toBeRemoved = toBeRemoved.left; }
+        else { toBeRemoved = toBeRemoved.right; }
         }
-    }
+        }
+        if (!found) { return; }
+        // toBeRemoved contains obj
+        // If one of the children is empty, use the other
+        if (toBeRemoved.left == null || toBeRemoved.right == null)
+        {
+        Node newChild;
+        if (toBeRemoved.left == null)
+        {
+        newChild = toBeRemoved.right;
+        }
+        else
+        {
+        newChild = toBeRemoved.left;
+        }
+        if (parent == null) // Found in root
+        {
+        root = newChild;
+        }
+        else if (parent.left == toBeRemoved)
+        {
+        parent.left = newChild;
+        }
+        else
+        {
+        parent.right = newChild;
+        }
+        return;
+        }
+        // Neither subtree is empty
+        // Find smallest element of the right subtree
+        Node smallestParent = toBeRemoved;
+        Node smallest = toBeRemoved.right;
+        while (smallest.left != null)
+        {
+        smallestParent = smallest;
+        smallest = smallest.left;
+        }
+        // smallest contains smallest child in right subtree
+        // Move contents, unlink child
+        toBeRemoved.data = smallest.data;
+        if (smallestParent == toBeRemoved)
+        {
+        smallestParent.right = smallest.right;
+        }
+        else
+        {
+        smallestParent.left = smallest.right;
+        }
+        }
     
-   /**
-      Prints the contents of the tree in sorted order.
-   */
-   public void print()
-   {
+    /**
+     * Prints the contents of the tree in sorted order.
+    */
+    public void print()
+    {
       print(root);
       System.out.println();
-   }
+    }
 
    /**
       Prints a node and all of its descendants in sorted order.
